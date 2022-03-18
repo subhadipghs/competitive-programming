@@ -137,8 +137,8 @@ const heapify = (heap, i) => {
 
 const heapifyIter = (heap, i) => {
   let min = i;
+  let right = 2 * i + 2, left = 2 * i + 1;
   do {
-    let right = 2 * i + 2, left = 2 * i + 1;
     if (left < heap.length && right < heap.length) {
       min = heap[left] < heap[right] ? left : right;
     } else {
