@@ -79,12 +79,28 @@ function sort012Dutch(arr, n) {
   return arr;
 }
 
-//assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
-//assert.deepEqual(sort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
-//const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2]
+
+// Dutch flag with only 0, 1
+function sort01Dutch(arr, n) {
+  let low = 0,
+    high = n - 1;
+  while (low <= high) {
+    if (arr[low] == 0) {
+      low++;
+    } else {
+      arr[low] = arr[high]
+      high--;
+    }
+  }
+  return arr; 
+}
+
+const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2];
+const tc1 = [0, 1, 1, 0, 0, 1, 0, 1, 1]
+
 assert.deepEqual(sort012Dutch([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
 assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
 assert.deepEqual(sort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
-const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2];
 assert.deepEqual(sort012Dutch(tc, tc.length), sort012(tc, tc.length));
+assert.deepEqual(sort01Dutch(tc1, tc1.length), tc1.sort((a, b) => a - b));
 console.log("✅ Test cases passed");
