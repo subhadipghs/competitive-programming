@@ -3,6 +3,7 @@
 const assert = require("assert");
 
 function findUnion(a, n, b, m) {
+  console.time('map')
   const map = new Map();
   const union = [];
   while (n-- > 0) {
@@ -12,10 +13,12 @@ function findUnion(a, n, b, m) {
     map.set(b[m], 1);
   }
   map.forEach((_, k) => union.push(k));
+  console.timeLog('map')
   return union;
 }
 
 function findUnionUsingSet(a, n, b, m) {
+  console.time('set')
   const union = new Set();
   while (n-- > 0) {
     union.add(a[n]);
@@ -23,6 +26,25 @@ function findUnionUsingSet(a, n, b, m) {
   while (m-- > 0) {
     union.add(b[m]);
   }
+  const toArray = Array.from(union)
+  console.timeLog('set')
+  return toArray;
+}
+
+function findUnionNaive(a, n, b, m) {
+  console.time('naive')
+  const c = a.concat(b);
+  const union = [] 
+  for (let i = 0; i < c.length; i++) {
+    const firstIdx = c.indexOf(c[i]);
+    const lastIdx = c.lastIndexOf(c[i]);
+    if (firstIdx === lastIdx) {
+      union.push(c[i])
+    } else if (union.indexOf(c[i]) == -1) {
+      union.push(c[i])
+    } 
+  }
+  console.timeLog('naive')
   return union;
 }
 
@@ -39,11 +61,11 @@ const tcs = [
 ];
 
 function runTest(fn) {
-    const res = fn(...tc.input);
   tcs.forEach((tc) => {
-    res.forEach((x) => {
-      const f = tc.expected.indexOf(x),
-        l = tc.expected.lastIndexOf(x);
+    let res = fn(...tc.input);
+    tc.expected.forEach((x) => {
+      const f = res.indexOf(x),
+        l = res.lastIndexOf(x);
       assert.notEqual(f, -1);
       assert.notEqual(l, -1);
       assert.strictEqual(f, l);
@@ -53,6 +75,6 @@ function runTest(fn) {
 
 runTest(findUnion);
 runTest(findUnionUsingSet);
-
+runTest(findUnionNaive);
 
 console.log("passed");
