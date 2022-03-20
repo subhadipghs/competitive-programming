@@ -1,5 +1,4 @@
 "use strict";
-
 import assert from "assert";
 
 function sort012(arr, n) {
@@ -52,6 +51,40 @@ const inplaceSort012 = (arr, n) => {
   return arr;
 };
 
-assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+function sort012Dutch(arr, n) {
+  let low = 0,
+    mid = 0,
+    high = n - 1;
+  // we have three elements 0, 1, 2
+  // we have a cursor check each elements
+  // the idea is if we see 0 then we send it to the first 
+  // if we see 1 then go to next
+  // if we see 2 then we send it to the last portion of the array
+  while (mid <= high) {
+    if (arr[mid] == 0) {
+      let temp = arr[mid];
+      arr[mid] = arr[low];
+      arr[low] = temp;
+      low++;
+      mid++;
+    } else if (arr[mid] == 1) {
+      mid++;
+    } else {
+      let temp = arr[mid];
+      arr[mid] = arr[high];
+      arr[high] = temp;
+      high--;
+    }
+  }
+  return arr;
+}
 
+//assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+//assert.deepEqual(sort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+//const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2]
+assert.deepEqual(sort012Dutch([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+assert.deepEqual(sort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2];
+assert.deepEqual(sort012Dutch(tc, tc.length), sort012(tc, tc.length));
 console.log("✅ Test cases passed");
