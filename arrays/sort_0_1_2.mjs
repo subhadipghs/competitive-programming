@@ -51,8 +51,8 @@ const inplaceSort012 = (arr, n) => {
   return arr;
 };
 
-function sort012Dutch(arr, n) {
   let low = 0,
+function sort012Dutch(arr, n) {
     mid = 0,
     high = n - 1;
   // we have three elements 0, 1, 2
@@ -95,11 +95,13 @@ function sort01Dutch(arr, n) {
   return arr; 
 }
 
+// TODO: Program a DNF for four colour
+
 const tc = [1, 0, 1, 1, 2, 1, 2, 0, 0, 0, 2];
 const tc1 = [0, 1, 1, 0, 0, 1, 0, 1, 1]
 
-assert.deepEqual(sort012Dutch([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
 assert.deepEqual(inplaceSort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
+assert.deepEqual(sort012Dutch([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
 assert.deepEqual(sort012([0, 2, 1, 2, 0], 5), [0, 0, 1, 2, 2]);
 assert.deepEqual(sort012Dutch(tc, tc.length), sort012(tc, tc.length));
 assert.deepEqual(sort01Dutch(tc1, tc1.length), tc1.sort((a, b) => a - b));
