@@ -2,17 +2,27 @@
 
 const assert = require("assert");
 
-function findUnion(a1, n, a2, m) {
+function findUnion(a, n, b, m) {
   const map = new Map();
   const union = [];
-
   while (n-- > 0) {
-    map.set(a1[n], 1) 
+    map.set(a[n], 1);
   }
-  while(m-- > 0) {
-    map.set(a2[m], 1)
+  while (m-- > 0) {
+    map.set(b[m], 1);
   }
-  map.forEach((_, k) => union.push(k))
+  map.forEach((_, k) => union.push(k));
+  return union;
+}
+
+function findUnionUsingSet(a, n, b, m) {
+  const union = new Set();
+  while (n-- > 0) {
+    union.add(a[n]);
+  }
+  while (m-- > 0) {
+    union.add(b[m]);
+  }
   return union;
 }
 
@@ -28,15 +38,21 @@ const tcs = [
   },
 ];
 
-tcs.forEach((tc) => {
-  const res = findUnion(...tc.input);
-  res.forEach(x => {
-    const f = tc.expected.indexOf(x),
-      l = tc.expected.lastIndexOf(x);
-    assert.notEqual(f, -1)
-    assert.notEqual(l, -1)
-    assert.strictEqual(f, l);
-  })
-});
+function runTest(fn) {
+    const res = fn(...tc.input);
+  tcs.forEach((tc) => {
+    res.forEach((x) => {
+      const f = tc.expected.indexOf(x),
+        l = tc.expected.lastIndexOf(x);
+      assert.notEqual(f, -1);
+      assert.notEqual(l, -1);
+      assert.strictEqual(f, l);
+    });
+  });
+}
 
-console.log('passed')
+runTest(findUnion);
+runTest(findUnionUsingSet);
+
+
+console.log("passed");
