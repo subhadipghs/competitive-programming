@@ -13,7 +13,7 @@ function findUnion(a, n, b, m) {
     map.set(b[m], 1);
   }
   map.forEach((_, k) => union.push(k));
-  console.timeLog("map");
+  console.timeEnd("map");
   return union;
 }
 
@@ -27,7 +27,7 @@ function findUnionUsingSet(a, n, b, m) {
     union.add(b[m]);
   }
   const toArray = Array.from(union);
-  console.timeLog("set");
+  console.timeEnd("set");
   return toArray;
 }
 
@@ -44,17 +44,40 @@ function findUnionNaive(a, n, b, m) {
       union.push(c[i]);
     }
   }
-  console.timeLog("naive");
+  console.timeEnd("naive");
   return union;
 }
-const a = Array.from({ length: Math.ceil(getRandom(10e4, 10e5)) }, () =>
-  Math.floor(getRandom(100, 1e5))
-);
-const b = Array.from({ length: Math.ceil(getRandom(10e4, 10e5)) }, () =>
-  Math.floor(getRandom(100, 1e5))
-);
 
-console.dir({ a: a.length, b: b.length })
+
+function findUsingSort(a, n, b, m) {
+  console.time('sorting and search');
+  const [union, big] = n >= m ? [b, a] : [a, b];
+  union.sort((a, b) => a - b);
+  for (let i = 0; i < big.length; i++) {
+    const index = binarySearch(union, union.length, big[i]);
+    if (index === -1) {
+      union.push(big[i])
+    }
+  }
+  console.log(union);
+  console.timeEnd('sorting and search');
+  return union;
+}
+
+function binarySearch(a, m, key) {
+  let low = 0, high = m; 
+  while (low <= high) {
+    let mid = Math.ceil((low + high)/2);
+    if (a[mid] == key) {
+      return mid;
+    } else if (a[mid] > key) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  return -1;
+}
 
 const tcs = [
   {
@@ -67,14 +90,20 @@ const tcs = [
     expected: [85, 25, 1, 32, 54, 6, 2],
   },
   {
-    input: [a, a.length, b, b.length],
-    expected: []
+    input: [
+      [
+        1, 2, 5, 6, 2, 3, 5
+      ], 
+      7,
+      [
+        2, 4, 5, 6, 8, 9, 4, 6, 5
+      ], 
+      9 
+    ],
+    expected: '1 2 3 4 5 6 8 9'.split(" ").map(x => parseInt(x, 10))
   },
 ];
 
-function getRandom(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
 function runTest(fn) {
   tcs.forEach((tc) => {
@@ -93,6 +122,7 @@ function runTest(fn) {
 
 runTest(findUnion);
 runTest(findUnionUsingSet);
-runTest(findUnionNaive);
+runTest(findUsingSort);
+//runTest(findUnionNaive);
 
 console.log("passed");
