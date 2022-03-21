@@ -48,26 +48,26 @@ function findUnionNaive(a, n, b, m) {
   return union;
 }
 
-
 function findUsingSort(a, n, b, m) {
-  console.time('sorting and search');
+  console.time("sorting and search");
   const [union, big] = n >= m ? [b, a] : [a, b];
   union.sort((a, b) => a - b);
   for (let i = 0; i < big.length; i++) {
     const index = binarySearch(union, union.length, big[i]);
     if (index === -1) {
-      union.push(big[i])
+      union.push(big[i]);
     }
   }
   console.log(union);
-  console.timeEnd('sorting and search');
+  console.timeEnd("sorting and search");
   return union;
 }
 
 function binarySearch(a, m, key) {
-  let low = 0, high = m; 
+  let low = 0,
+    high = m;
   while (low <= high) {
-    let mid = Math.ceil((low + high)/2);
+    let mid = Math.ceil((low + high) / 2);
     if (a[mid] == key) {
       return mid;
     } else if (a[mid] > key) {
@@ -90,20 +90,10 @@ const tcs = [
     expected: [85, 25, 1, 32, 54, 6, 2],
   },
   {
-    input: [
-      [
-        1, 2, 5, 6, 2, 3, 5
-      ], 
-      7,
-      [
-        2, 4, 5, 6, 8, 9, 4, 6, 5
-      ], 
-      9 
-    ],
-    expected: '1 2 3 4 5 6 8 9'.split(" ").map(x => parseInt(x, 10))
+    input: [[1, 2, 5, 6, 2, 3, 5], 7, [2, 4, 5, 6, 8, 9, 4, 6, 5], 9],
+    expected: "1 2 3 4 5 6 8 9".split(" ").map((x) => parseInt(x, 10)),
   },
 ];
-
 
 function runTest(fn) {
   tcs.forEach((tc) => {
