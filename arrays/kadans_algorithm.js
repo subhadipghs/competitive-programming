@@ -18,8 +18,8 @@ function findLargestNaive(a, N) {
     for (let j = i; j < N; j++) {
       temp.push(a[j]);
       if (total(temp) > mx) {
-        mx = total(temp);
         // we found a new sub array containing the maximum sum
+        mx = total(temp);
         // so we pop the last item and push the new sub array
         sub.pop();
         sub.push([...temp]);
@@ -43,6 +43,28 @@ function kadanesAlgorithm(arr, N) {
   return max;
 }
 
+function kadanaesAlgorithmSubArray(a, N) {
+  let max = Number.NEGATIVE_INFINITY, temp = 0;
+  const sub = [];
+  let start = 0, end = 0, s = 0;
+  for (let i = 0; i < N; i++) {
+    temp += a[i];
+    if (temp > max) {
+      max = temp;
+      start = s;
+      end = i;
+    }
+    if (temp <= 0) {
+      temp = 0;
+      s = i + 1;
+    }
+  }
+  for (let i = start; i <= end; i++) {
+    sub.push(a[i])
+  }
+  return sub;
+}
+
 const total = (arr) => arr.reduce((prev, curr) => prev + curr);
 
 const tcs = [
@@ -52,6 +74,7 @@ const tcs = [
     exp: 7,
   },
 ];
+
 function test(fn) {
   tcs.forEach((tc) => {
     console.log(`Running [${fn.name}]: ${tc.name}`);
@@ -63,3 +86,5 @@ function test(fn) {
 
 test(findLargestNaive);
 test(kadanesAlgorithm);
+test(kadanesAlgorithm);
+console.log(kadanaesAlgorithmSubArray([-2, -3, 4, -1, -2, 1, 5, -3], 8))
