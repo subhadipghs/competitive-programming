@@ -29,6 +29,20 @@ function findLargestNaive(a, N) {
   return mx;
 }
 
+function kadanesAlgorithm(arr, N) {
+  let max = Number.NEGATIVE_INFINITY, temp_max = 0;
+  for (let i = 0; i < N; i++) {
+    temp_max += arr[i];
+    if (temp_max > max) {
+      max = temp_max;
+    }
+    if (temp_max < 0) {
+      temp_max = 0;
+    }
+  }
+  return max;
+}
+
 const total = (arr) => arr.reduce((prev, curr) => prev + curr);
 
 const tcs = [
@@ -42,9 +56,10 @@ function test(fn) {
   tcs.forEach((tc) => {
     console.log(`Running [${fn.name}]: ${tc.name}`);
     const res = fn(...tc.input);
-    console.log("✔ Passed: " + tc.name);
     equal(res, tc.exp);
+    console.log("✔ Passed: " + tc.name);
   });
 }
 
 test(findLargestNaive);
+test(kadanesAlgorithm);
