@@ -1,5 +1,5 @@
 
-
+const assert = require('assert')
 
 var findDuplicates = function(nums) {
   var map = new Map()
@@ -13,7 +13,34 @@ var findDuplicates = function(nums) {
     }
   }
 
-  console.log(map)
+  for (let [key, value] of map) {
+    if (value > 1) {
+      return key
+    } 
+  }
+  return null
 }
 
 
+function test(tcs, sol) {
+  tcs.forEach(tc => {
+    const res = sol(tc.input)
+    assert.equal(res, tc.output)
+  })
+  console.log('ALL PASSED')
+}
+
+
+const tcs = [
+  {
+    input: [1, 2, 3, 3, 5],
+    output: 3
+  },
+  {
+    input: [0, 9, 4, 2, 9],
+    output: 9
+  }
+]
+
+
+test(tcs, findDuplicates)
