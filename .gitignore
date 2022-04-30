@@ -1,3 +1,5 @@
 
 # object files
 *.o
+
+.ccls-cache
