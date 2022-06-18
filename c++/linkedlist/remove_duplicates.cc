@@ -31,11 +31,12 @@ remove_duplicates_from_list (ListNode *head)
 }
 
 void
-should_remove_duplicates_from_linked_list (std::vector<int> v,
-                                           std::vector<int> e)
+should_remove_duplicates_from_linked_list (
+    std::vector<int> v, std::vector<int> e,
+    ListNode *(*testable_function) (ListNode *list))
 {
   ListNode *list = make_list (v);
-  ListNode *result_list = remove_duplicates_from_list (list);
+  ListNode *result_list = testable_function (list);
   std::vector<int> result_vec = make_vec (result_list);
 #ifdef DEBUG
   debug_list (result_list);
@@ -54,6 +55,7 @@ main (int argc, char **argv)
 {
   std::vector<int> v{ 1, 1, 2 };
   std::vector<int> e{ 1, 2 };
-  should_remove_duplicates_from_linked_list (v, e);
+  should_remove_duplicates_from_linked_list (v, e,
+                                             remove_duplicates_from_list);
   return 0;
 }
