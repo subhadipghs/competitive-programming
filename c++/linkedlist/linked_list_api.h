@@ -29,4 +29,9 @@ ListNode *make_list (std::vector<int> &v);
  */
 ListNode *append (ListNode *head, int val);
 
+/**
+ * Create vector from list
+ */
+std::vector<int> make_vec (ListNode *list);
+
 #endif // !_LIST_API_

@@ -31,6 +31,18 @@ make_list (std::vector<int> &nums)
   return head;
 }
 
+std::vector<int>
+make_vec (ListNode *list)
+{
+  std::vector<int> res;
+  while (list != nullptr)
+    {
+      res.push_back (list->val);
+      list = list->next;
+    }
+  return res;
+}
+
 void
 debug_list (ListNode *head)
 {
