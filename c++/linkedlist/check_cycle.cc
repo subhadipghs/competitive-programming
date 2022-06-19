@@ -28,7 +28,7 @@ has_cycle_two_pointer (ListNode *head)
 
   while (fast != nullptr && fast->next != nullptr)
     {
-      if (slow->val == fast->val)
+      if (slow->next == fast->next->next)
         return true;
       slow = slow->next;
       fast = fast->next->next;
