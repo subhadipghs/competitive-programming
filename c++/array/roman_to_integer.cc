@@ -3,16 +3,12 @@
 
 using namespace std;
 
-int romanToInt(string s)
+int
+romanToInt(string s)
 {
   map<char, int> romans = {
-      {'I', 1},
-      {'V', 5},
-      {'X', 10},
-      {'L', 50},
-      {'C', 100},
-      {'M', 1000},
-      {'D', 500},
+    { 'I', 1 },   { 'V', 5 },    { 'X', 10 },  { 'L', 50 },
+    { 'C', 100 }, { 'M', 1000 }, { 'D', 500 },
   };
 
   int total = 0;
@@ -20,21 +16,19 @@ int romanToInt(string s)
   for (int i = 0; i < s.length(); i++)
     int curr = romans[s[i]],
     {
-        next = romans[s[i + 1]];
+      next = romans[s[i + 1]];
 
-    if (curr >= next)
-    {
-      total += curr;
+      if (curr >= next) {
+        total += curr;
+      } else {
+        total -= curr;
+      }
     }
-    else
-    {
-      total -= curr;
-    }
-  }
   return total;
 }
 
-int main(void)
+int
+main(void)
 {
   cout << romanToInt("IV");
   return 0;

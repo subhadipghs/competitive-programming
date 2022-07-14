@@ -1,19 +1,20 @@
 
-#include <bits/stdc++.h>
 #include "linked_list_api.cc"
+#include <bits/stdc++.h>
 
 using namespace std;
 
-ListNode* remove_nth_node_from_last(ListNode* head, int n)
+ListNode*
+remove_nth_node_from_last(ListNode* head, int n)
 {
   int count = 0;
   ListNode* iter = head;
 
   if (!head) {
-    return head; 
+    return head;
   }
 
-  while(iter) {
+  while (iter) {
     count++;
     iter = iter->next;
   }
@@ -26,7 +27,6 @@ ListNode* remove_nth_node_from_last(ListNode* head, int n)
     curr = curr->next;
   }
 
-
   if (!curr) {
     return nullptr;
   } else if (!prev) {
@@ -38,11 +38,11 @@ ListNode* remove_nth_node_from_last(ListNode* head, int n)
   return head;
 }
 
-
-int main(int argc, char** argv)
+int
+main(int argc, char** argv)
 {
 
-  vector<int> v = {1};
+  vector<int> v = { 1 };
   int n = 1;
   ListNode* head = make_list(v);
   ListNode* res = remove_nth_node_from_last(head, n);

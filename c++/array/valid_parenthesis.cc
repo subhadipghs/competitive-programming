@@ -3,14 +3,16 @@
 
 using namespace std;
 
-bool isValidParenthesis(string s) {
+bool
+isValidParenthesis(string s)
+{
   unordered_map<char, char> lookup = {
     { ')', '(' },
     { '}', '{' },
     { ']', '[' },
   };
   stack<char> st;
-  
+
   // minimum 2 characters are required for a valid parenthesis
   if (s.length() <= 1) {
     return false;
@@ -39,7 +41,9 @@ bool isValidParenthesis(string s) {
   return st.empty();
 }
 
-int main(void) {
+int
+main(void)
+{
   cout << isValidParenthesis("()") << endl;
   cout << isValidParenthesis("){") << endl;
 }

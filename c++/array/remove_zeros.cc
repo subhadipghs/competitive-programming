@@ -5,7 +5,9 @@ using namespace std;
 #define index size_t
 
 // it does not maintain the order
-void moveZeros(vector<int>& nums) {
+void
+moveZeros(vector<int>& nums)
+{
   index start = 0, end = nums.size() - 1;
   int temp = 0;
   while (start < end) {
@@ -23,14 +25,18 @@ void moveZeros(vector<int>& nums) {
   }
 }
 
-void moveZerosOrder(vector<int>& nums) {
+void
+moveZerosOrder(vector<int>& nums)
+{
   for (int i = 0; i < nums.size(); i++) {
     // todo: later bye !eee
   }
 }
 
-int main(int argc, char* argv[]) {
-  vector<int> v = { 0,1,0,3,12 };
+int
+main(int argc, char* argv[])
+{
+  vector<int> v = { 0, 1, 0, 3, 12 };
   moveZerosOrder(v);
   for (int i = 0; i < v.size(); i++) {
     cout << v[i] << " ";

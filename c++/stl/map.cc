@@ -6,15 +6,11 @@
 
 using namespace std;
 
-int main(void) {
-  map<char, int> m = {
-    { 'a', 1 },
-    { 'b', 2 }
-  };
-  unordered_map<char, int> a = {
-    { 'a', 1 },
-    { 'b', 2 }
-  };
+int
+main(void)
+{
+  map<char, int> m = { { 'a', 1 }, { 'b', 2 } };
+  unordered_map<char, int> a = { { 'a', 1 }, { 'b', 2 } };
   unordered_map<int, char> b = {
     { 1, 'a' },
     { 2, 'b' },
